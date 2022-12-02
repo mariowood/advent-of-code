@@ -1,19 +1,27 @@
-﻿using PuzzleSolver.Days;
+﻿using Solver = PuzzleSolver.Days._01.Solver;
 
 Console.WriteLine("Please enter the advent of code day (a number between 1 and 24 inclusive).");
 string? day = Console.ReadLine();
-List<string> lines = File.ReadLines("input.txt").ToList();
 
-if (int.TryParse(day, out int puzzle))
+if (int.TryParse(day, out int puzzleDay))
 {
-    switch (puzzle)
+    string inputFile = $"Days/{puzzleDay:D2}/input.txt";
+    List<string> lines = File.ReadLines(inputFile).ToList();
+    
+    switch (puzzleDay)
     {
         case 1:
-            var solver = new December1st(lines);
-            var elf = solver.GetElfWithMostCalories();
-            var topThreeElvesTotalCalories = solver.GetTopThreeElvesTotalCalories();
+            var solver = new Solver(lines);
+            KeyValuePair<int, int> elf = solver.GetElfWithMostCalories();
+            int topThreeElvesTotalCalories = solver.GetTopThreeElvesTotalCalories();
             Console.WriteLine($"The elf with the most calories is {elf.Key} with {elf.Value} calories.");
             Console.WriteLine($"The top 3 elves have a total of {topThreeElvesTotalCalories} calories.");
+            break;
+        case 2:
+            int totalScore = PuzzleSolver.Days._02.Solver.GetTotalScore(lines);
+            int totalScoreForTargetResult = PuzzleSolver.Days._02.Solver.GetTotalScoreForTargetResult(lines);
+            Console.WriteLine($"The total score is {totalScore}");
+            Console.WriteLine($"The total score using target result strategy is {totalScoreForTargetResult}");
             break;
         default:
             Console.WriteLine("Unrecognized puzzle day.");
