@@ -1,12 +1,12 @@
-﻿namespace PuzzleSolver.Days;
+﻿namespace PuzzleSolver.Days._01;
 
-public class December1st
+public class Solver
 {
     private readonly Dictionary<int, int> _caloriesPerElf = new();
 
-    public December1st(List<string> lines)
+    public Solver(List<string> input)
     {
-        GetCaloriesForElf(lines, 0);
+        ProcessInput(input, 0);
     }
 
     public int GetTopThreeElvesTotalCalories()
@@ -24,13 +24,13 @@ public class December1st
         return elf;
     }
 
-    private void GetCaloriesForElf(List<string> lines, int index)
+    private void ProcessInput(List<string> input, int index)
     {
         int calories = 0;
 
-        while (index < lines.Count && !string.IsNullOrWhiteSpace(lines[index]))
+        while (index < input.Count && !string.IsNullOrWhiteSpace(input[index]))
         {
-            if (int.TryParse(lines[index], out int lineCalories))
+            if (int.TryParse(input[index], out int lineCalories))
             {
                 calories += lineCalories;
             }
@@ -44,9 +44,9 @@ public class December1st
 
         _caloriesPerElf[numberOfElves + 1] = calories;
 
-        if (index < lines.Count)
+        if (index < input.Count)
         {
-            GetCaloriesForElf(lines, index);
+            ProcessInput(input, index);
         }
     }
 }
