@@ -30,11 +30,11 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
         {
             AnsiConsole.MarkupLine($":christmas_tree::star::santa_claus: Solving puzzle for {day:00} December {year} :santa_claus::star::christmas_tree:");
             PuzzleSolver puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
-            Type puzzleType = puzzleSolver.GetType(); 
-            CustomAttributeData customAttribute = puzzleType
-                .CustomAttributes
-                .First(a => a.AttributeType == typeof(PuzzleDescriptionAttribute));
-            string puzzleDescription = customAttribute.ConstructorArguments[0].ToString().Trim('"');
+            Type puzzleType = puzzleSolver.GetType();
+            string puzzleDescription = puzzleType.GetCustomAttribute<PuzzleDescriptionAttribute>() 
+                is { } puzzleDescriptionAttribute ?
+                puzzleDescriptionAttribute.Description.Trim('"') :
+                "Unknown";
             AnsiConsole.MarkupLine($"{Constants.Puzzle} [green]{puzzleDescription}[/]");
             string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
             List<string> puzzleInput = File.ReadLines($"{currentDirectory}/Year{year}/Day{day:00}/input.txt").ToList();
