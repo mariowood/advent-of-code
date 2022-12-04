@@ -1,23 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="Days\Day01\input.txt">
+        <PackageReference Include="Spectre.Console" />
+        <PackageReference Include="Spectre.Console.Cli" />
+        <PackageReference Include="System.CommandLine" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Year2022\Day01\input.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Days\02\input.txt">
+      <None Update="Year2022\Day02\input.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Days\01\input.txt">
+      <None Update="Year2022\Day03\input.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Days\03\input.txt">
+      <None Update="Year2022\Day04\input.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

@@ -1,15 +1,30 @@
-﻿namespace PuzzleSolver.Days._02;
+﻿using Spectre.Console;
 
-public static class Solver
+namespace PuzzleSolver.Year2022.Day02;
+
+public class Solver : PuzzleSolver
 {
-    public static int GetTotalScore(List<string> input)
+    private readonly List<string> _puzzleInput = new();
+
+    public override void ProcessInput(List<string> lines)
     {
-        return input.Sum(line => ProcessGame(line[0], line[2]));
+        _puzzleInput.AddRange(lines);
     }
 
-    public static int GetTotalScoreForTargetResult(List<string> input)
+    public override void SolvePartOne()
     {
-        return input.Sum(line => ProcessGameForResult(line[0], line[2]));
+        int totalScore = _puzzleInput
+            .Sum(line => ProcessGame(line[0], line[2]));
+        AnsiConsole.MarkupLine(
+            $"[bold blue]Pt. 1:[/] The total score is [green]{totalScore}[/]");
+    }
+
+    public override void SolvePartTwo()
+    {
+        int totalScoreForTargetResult = _puzzleInput
+            .Sum(line => ProcessGameForResult(line[0], line[2]));
+        AnsiConsole.MarkupLine(
+            $"[bold purple]Pt. 2:[/] The total score using target result strategy is [green]{totalScoreForTargetResult}[/]");
     }
 
     private static int ProcessGame(char opponent, char player)
