@@ -3,6 +3,7 @@ using Spectre.Console;
 
 namespace PuzzleSolver.Year2022.Day04;
 
+[PuzzleDescription("Day 4: Camp Cleanup", 2022, 4)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();

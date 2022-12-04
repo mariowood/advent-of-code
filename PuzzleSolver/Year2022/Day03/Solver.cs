@@ -2,6 +2,7 @@
 
 namespace PuzzleSolver.Year2022.Day03;
 
+[PuzzleDescription("Day 3: Rucksack Reorganization", 2022, 3)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();

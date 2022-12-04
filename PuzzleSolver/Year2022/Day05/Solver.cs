@@ -1,5 +1,6 @@
 ﻿namespace PuzzleSolver.Year2022.Day05;
 
+[PuzzleDescription("unknown", 2022, 5)]
 public class Solver : PuzzleSolver
 {
     public override void ProcessInput(List<string> lines)
