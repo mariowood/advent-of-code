@@ -23,6 +23,12 @@ if (int.TryParse(day, out int puzzleDay))
             Console.WriteLine($"The total score is {totalScore}");
             Console.WriteLine($"The total score using target result strategy is {totalScoreForTargetResult}");
             break;
+        case 3:
+            int totalItemPriority = PuzzleSolver.Days._03.Solver.GetItemPriorityTotals(lines);
+            int totalBadgePriority = PuzzleSolver.Days._03.Solver.GetBadgePriorityTotals(lines);
+            Console.WriteLine($"The total item priority is {totalItemPriority}");
+            Console.WriteLine($"The total badge priority is {totalBadgePriority}");
+            break;
         default:
             Console.WriteLine("Unrecognized puzzle day.");
             break;
