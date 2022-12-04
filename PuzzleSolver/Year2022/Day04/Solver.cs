@@ -16,14 +16,14 @@ public class Solver : PuzzleSolver
     {
         int overlappingAssignments = 
             _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
-        AnsiConsole.MarkupLine($"[bold blue]Pt. 1:[/]There are [green]{overlappingAssignments}[/] overlapping assignments.");
+        AnsiConsole.MarkupLine($"{Constants.PartOne} There are [green]{overlappingAssignments}[/] overlapping assignments.");
     }
 
     public override void SolvePartTwo()
     {
         int partiallyOverlappingAssignments =
             _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
-        AnsiConsole.MarkupLine($"[bold purple]Pt. 2:[/]There are [green]{partiallyOverlappingAssignments}[/] partially overlapping assignments.");
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} There are [green]{partiallyOverlappingAssignments}[/] partially overlapping assignments.");
     }
 
     private static GroupRanges GetGroupRanges(string inputLine)

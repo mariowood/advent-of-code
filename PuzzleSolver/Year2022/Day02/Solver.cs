@@ -15,16 +15,14 @@ public class Solver : PuzzleSolver
     {
         int totalScore = _puzzleInput
             .Sum(line => ProcessGame(line[0], line[2]));
-        AnsiConsole.MarkupLine(
-            $"[bold blue]Pt. 1:[/] The total score is [green]{totalScore}[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartOne} The total score is [green]{totalScore}[/]");
     }
 
     public override void SolvePartTwo()
     {
         int totalScoreForTargetResult = _puzzleInput
             .Sum(line => ProcessGameForResult(line[0], line[2]));
-        AnsiConsole.MarkupLine(
-            $"[bold purple]Pt. 2:[/] The total score using target result strategy is [green]{totalScoreForTargetResult}[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} The total score using target result strategy is [green]{totalScoreForTargetResult}[/]");
     }
 
     private static int ProcessGame(char opponent, char player)
