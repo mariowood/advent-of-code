@@ -29,7 +29,7 @@ public class Solver : PuzzleSolver
             _caloriesPerElf.Add(currentElfCalories);
         }
     }
-    
+
     public override void SolvePartOne()
     {
         int maxCalories = GetMaxCalories();
@@ -41,14 +41,8 @@ public class Solver : PuzzleSolver
         int topThreeElvesTotalCalories = GetTopThreeElvesTotalCalories();
         AnsiConsole.MarkupLine($"{Constants.PartTwo} The top 3 elves have a total of [green]{topThreeElvesTotalCalories} calories.[/]");
     }
-    
-    private int GetTopThreeElvesTotalCalories()
-    {
-        return _caloriesPerElf.OrderDescending().TakeLast(3).Sum();
-    }
-    
-    private int GetMaxCalories()
-    {
-        return _caloriesPerElf.Max();
-    }
+
+    private int GetTopThreeElvesTotalCalories() => _caloriesPerElf.OrderDescending().TakeLast(3).Sum();
+
+    private int GetMaxCalories() => _caloriesPerElf.Max();
 }

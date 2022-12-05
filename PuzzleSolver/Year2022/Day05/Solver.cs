@@ -11,10 +11,10 @@ public class Solver : PuzzleSolver
     private readonly List<List<int>> _moves = new();
     private readonly List<string> _crateLines = new();
     private readonly List<string> _moveLines = new();
-    
+
     public override void ProcessInput(List<string> lines)
     {
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
             if (line.StartsWith("move"))
             {
@@ -26,7 +26,7 @@ public class Solver : PuzzleSolver
             }
         }
 
-        ProcessMoveLines();        
+        ProcessMoveLines();
         ProcessCrateLines();
     }
 
@@ -41,7 +41,7 @@ public class Solver : PuzzleSolver
     {
         ProcessMovesInStacks();
         string topCrates = string.Join("", _cratesPt2.Select(c => c[^1]));
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top crates are [green]{topCrates}[/].");   
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top crates are [green]{topCrates}[/].");
     }
 
     private void ProcessCrateLines()
@@ -61,7 +61,7 @@ public class Solver : PuzzleSolver
         {
             for (int crateColumn = 0; crateColumn < numberOfColumns; crateColumn++)
             {
-                char crate = _crateLines[crateLine][crateColumn * 3 + crateColumn + 1];
+                char crate = _crateLines[crateLine][(crateColumn * 3) + crateColumn + 1];
                 if (crate != ' ')
                 {
                     _cratesPt1[crateColumn].Add(crate);
@@ -75,11 +75,11 @@ public class Solver : PuzzleSolver
     {
         const string pattern = @"\w+\s(\d+)\s\w+\s(\d+)\s\w+\s(\d+)";
         Regex reg = new Regex(pattern, RegexOptions.Compiled);
-        
+
         for (int i = 0; i < _moveLines.Count; i++)
         {
             Match match = reg.Match(_moveLines[i]);
-            
+
             _moves.Add(new List<int>());
             _moves[i].Add(int.Parse(match.Groups[1].Value));
             _moves[i].Add(int.Parse(match.Groups[2].Value));

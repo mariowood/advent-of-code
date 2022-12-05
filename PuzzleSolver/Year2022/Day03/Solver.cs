@@ -7,10 +7,7 @@ public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    public override void ProcessInput(List<string> lines)
-    {
-        _puzzleInput.AddRange(lines);
-    }
+    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
     public override void SolvePartOne()
     {
@@ -25,12 +22,12 @@ public class Solver : PuzzleSolver
             throw new ArgumentException();
         }
 
-        var badgePriorityTotal = 0;
-        
+        int badgePriorityTotal = 0;
+
         for (int i = 0; i < _puzzleInput.Count; i+=3)
         {
-            var group = _puzzleInput.GetRange(i, 3);
-            var badge = GetDuplicateBadgeForGroup(group);
+            List<string> group = _puzzleInput.GetRange(i, 3);
+            int badge = GetDuplicateBadgeForGroup(group);
             badgePriorityTotal += GetItemPriority(badge);
         }
 
@@ -41,17 +38,15 @@ public class Solver : PuzzleSolver
     {
         string one = line[..(line.Length / 2)];
         string two = line[(line.Length / 2)..];
-        
+
         return GetItemPriority(one.First(two.Contains));
     }
 
-    private static int GetDuplicateBadgeForGroup(List<string> group)
-    {
-        return group[0].First(i => 
-            group[1].Contains(i) && 
+    private static int GetDuplicateBadgeForGroup(List<string> group) =>
+        group[0].First(i =>
+            group[1].Contains(i) &&
             group[2].Contains(i));
-    }
-    
+
     private static int GetItemPriority(int item)
     {
         if (item <= 90)
