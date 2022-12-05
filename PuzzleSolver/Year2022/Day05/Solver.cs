@@ -6,8 +6,9 @@ namespace PuzzleSolver.Year2022.Day05;
 [PuzzleDescription("Day 5: Supply Stacks", 2022, 5)]
 public class Solver : PuzzleSolver
 {
-    private List<List<char>> _crates = new();
-    private List<List<int>> _moves = new();
+    private readonly List<List<char>> _cratesPt1 = new();
+    private readonly List<List<char>> _cratesPt2 = new();
+    private readonly List<List<int>> _moves = new();
     private readonly List<string> _crateLines = new();
     private readonly List<string> _moveLines = new();
     
@@ -32,13 +33,15 @@ public class Solver : PuzzleSolver
     public override void SolvePartOne()
     {
         ProcessMoves();
-        string topCrates = string.Join("", _crates.Select(c => c[^1]));
+        string topCrates = string.Join("", _cratesPt1.Select(c => c[^1]));
         AnsiConsole.MarkupLine($"{Constants.PartOne} The top crates are [green]{topCrates}[/].");
     }
 
     public override void SolvePartTwo()
     {
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} Not implemented yet.");   
+        ProcessMovesInStacks();
+        string topCrates = string.Join("", _cratesPt2.Select(c => c[^1]));
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top crates are [green]{topCrates}[/].");   
     }
 
     private void ProcessCrateLines()
@@ -50,7 +53,8 @@ public class Solver : PuzzleSolver
 
         for (int column = 0; column < numberOfColumns; column++)
         {
-            _crates.Add(new List<char>());
+            _cratesPt1.Add(new List<char>());
+            _cratesPt2.Add(new List<char>());
         }
 
         for (int crateLine = 1; crateLine < _crateLines.Count; crateLine++)
@@ -60,7 +64,8 @@ public class Solver : PuzzleSolver
                 char crate = _crateLines[crateLine][crateColumn * 3 + crateColumn + 1];
                 if (crate != ' ')
                 {
-                    _crates[crateColumn].Add(crate);
+                    _cratesPt1[crateColumn].Add(crate);
+                    _cratesPt2[crateColumn].Add(crate);
                 }
             }
         }
@@ -84,17 +89,30 @@ public class Solver : PuzzleSolver
 
     private void ProcessMoves()
     {
-        for (int moveInstruction = 0; moveInstruction < _moves.Count; moveInstruction++)
+        foreach (List<int> move in _moves)
         {
-            for (int moveCount = 0; moveCount < _moves[moveInstruction][0]; moveCount++)
+            for (int moveCount = 0; moveCount < move[0]; moveCount++)
             {
-                int moveFrom = _moves[moveInstruction][1] - 1;
-                int moveTo = _moves[moveInstruction][2] - 1;
+                int moveFrom = move[1] - 1;
+                int moveTo = move[2] - 1;
 
-                char movingCrate = _crates[moveFrom][_crates[moveFrom].Count - 1];
-                _crates[moveFrom].RemoveAt(_crates[moveFrom].Count - 1);
-                _crates[moveTo].Add(movingCrate);
+                char movingCrate = _cratesPt1[moveFrom][_cratesPt1[moveFrom].Count - 1];
+                _cratesPt1[moveFrom].RemoveAt(_cratesPt1[moveFrom].Count - 1);
+                _cratesPt1[moveTo].Add(movingCrate);
             }
+        }
+    }
+
+    private void ProcessMovesInStacks()
+    {
+        foreach (List<int> move in _moves)
+        {
+            int take = move[0];
+            int moveFrom = move[1] - 1;
+            int moveTo = move[2] - 1;
+            List<char> movingCrates = _cratesPt2[moveFrom].TakeLast(take).ToList();
+            _cratesPt2[moveFrom].RemoveRange(_cratesPt2[moveFrom].Count - take, take);
+            _cratesPt2[moveTo].AddRange(movingCrates);
         }
     }
 }
