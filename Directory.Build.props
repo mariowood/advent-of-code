@@ -12,6 +12,7 @@
     <ContinuousIntegrationBuild Condition=" '$(CI)' != '' ">true</ContinuousIntegrationBuild>
     <Copyright>Andrew Marwood (c) 2022-$([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
     <Deterministic>true</Deterministic>
+    <DisableImplicitAssetTargetFallback>true</DisableImplicitAssetTargetFallback>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
