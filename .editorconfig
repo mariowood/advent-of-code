@@ -12,6 +12,9 @@ trim_trailing_whitespace = true
 [*.{config,csproj,json,props,ruleset,targets,vsconfig,yml}]
 indent_size = 2
 
+[*.ps1]
+end_of_line = lf
+
 # Code files
 [*.{cs,csx,vb,vbx}]
 indent_size = 4
