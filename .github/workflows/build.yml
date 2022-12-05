@@ -49,4 +49,4 @@ jobs:
 
     - name: Build, test and publish
       shell: pwsh
-      run: ./build.ps1 -Runtime win10-x64
+      run: ./build.ps1
