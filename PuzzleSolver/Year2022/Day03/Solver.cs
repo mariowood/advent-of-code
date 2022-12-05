@@ -2,6 +2,7 @@
 
 namespace PuzzleSolver.Year2022.Day03;
 
+[PuzzleDescription("Day 3: Rucksack Reorganization", 2022, 3)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
@@ -14,7 +15,7 @@ public class Solver : PuzzleSolver
     public override void SolvePartOne()
     {
         int itemPriorityTotals = _puzzleInput.Select(GetDuplicateItemForPack).Sum();
-        AnsiConsole.MarkupLine($"[bold blue]Pt. 1:[/] The total item priority is [green]{itemPriorityTotals}[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartOne} The total item priority is [green]{itemPriorityTotals}[/]");
     }
 
     public override void SolvePartTwo()
@@ -33,7 +34,7 @@ public class Solver : PuzzleSolver
             badgePriorityTotal += GetItemPriority(badge);
         }
 
-        AnsiConsole.MarkupLine($"[bold purple]Pt. 2:[/] The total badge priority is [green]{badgePriorityTotal}[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} The total badge priority is [green]{badgePriorityTotal}[/]");
     }
 
     private static int GetDuplicateItemForPack(string line)

@@ -2,6 +2,7 @@
 
 namespace PuzzleSolver.Year2022.Day01;
 
+[PuzzleDescription("Day 1: Calorie Counting", 2022, 1)]
 public class Solver : PuzzleSolver
 {
     private readonly List<int> _caloriesPerElf = new();
@@ -32,13 +33,13 @@ public class Solver : PuzzleSolver
     public override void SolvePartOne()
     {
         int maxCalories = GetMaxCalories();
-        AnsiConsole.MarkupLine($"[bold blue]Pt. 1:[/] The elf with the most calories has [green]{maxCalories} calories[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartOne} The elf with the most calories has [green]{maxCalories} calories[/]");
     }
 
     public override void SolvePartTwo()
     {
         int topThreeElvesTotalCalories = GetTopThreeElvesTotalCalories();
-        AnsiConsole.MarkupLine($"[bold purple]Pt. 2:[/] The top 3 elves have a total of [green]{topThreeElvesTotalCalories} calories.[/]");
+        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top 3 elves have a total of [green]{topThreeElvesTotalCalories} calories.[/]");
     }
     
     private int GetTopThreeElvesTotalCalories()
