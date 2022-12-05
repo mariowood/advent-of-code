@@ -7,10 +7,7 @@ public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    public override void ProcessInput(List<string> lines)
-    {
-        _puzzleInput.AddRange(lines);
-    }
+    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
     public override void SolvePartOne()
     {
@@ -91,7 +88,7 @@ public class Solver : PuzzleSolver
         const int rock = 1;
         const int paper = 2;
         const int scissors = 3;
-        
+
         int result = 0;
 
         switch (player)
@@ -143,7 +140,7 @@ public class Solver : PuzzleSolver
         public const int Draw = 3;
         public const int Lose = 0;
     }
-    
+
     private enum Move
     {
         Rock,

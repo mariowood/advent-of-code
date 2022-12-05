@@ -1,0 +1,52 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - '**/*.gitattributes'
+    - '**/*.gitignore'
+    - '**/*.md'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AWS_CLOUDFORMATION_STACK: adventofcode
+  AWS_LAMBDA_PACKAGE_PATH: ./artifacts/lambda.zip
+  AWS_REGION: eu-west-2
+  AWS_URL_PROD: https://aoc.martincostello.com/
+  AZURE_URL_PROD: https://advent--of--code.azurewebsites.net/
+  AZURE_WEBAPP_NAME: advent--of--code
+  AZURE_WEBAPP_PACKAGE_PATH: ./artifacts/publish
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+  DOTNET_MULTILEVEL_LOOKUP: 0
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION: 1
+  FORCE_COLOR: 1
+  NUGET_XMLDOC_MODE: skip
+  TERM: xterm
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+
+    - name: Build, test and publish
+      shell: pwsh
+      run: ./build.ps1 -Runtime win10-x64

@@ -7,16 +7,10 @@ public class Solver : PuzzleSolver
 {
     public override void ProcessInput(List<string> lines)
     {
-        
+
     }
 
-    public override void SolvePartOne()
-    {
-        AnsiConsole.MarkupLine($"{Constants.PartOne} Not implemented");
-    }
+    public override void SolvePartOne() => AnsiConsole.MarkupLine($"{Constants.PartOne} Not implemented");
 
-    public override void SolvePartTwo()
-    {
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} Not implemented");
-    }
+    public override void SolvePartTwo() => AnsiConsole.MarkupLine($"{Constants.PartTwo} Not implemented");
 }
