@@ -1,6 +1,4 @@
-﻿using Spectre.Console;
-
-namespace PuzzleSolver.Year2022.Day07;
+﻿namespace PuzzleSolver.Year2022.Day07;
 
 public class Solver : PuzzleSolver
 {

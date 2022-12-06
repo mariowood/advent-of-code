@@ -1,6 +1,4 @@
-﻿using Spectre.Console;
-
-namespace PuzzleSolver.Year2022.Day02;
+﻿namespace PuzzleSolver.Year2022.Day02;
 
 [PuzzleDescription("Day 2: Rock Paper Scissors", 2022, 2)]
 public class Solver : PuzzleSolver

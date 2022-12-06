@@ -1,6 +1,4 @@
-﻿using Spectre.Console;
-
-namespace PuzzleSolver.Year2022.Day06;
+﻿namespace PuzzleSolver.Year2022.Day06;
 
 [PuzzleDescription(description: "Day 6: Tuning Trouble", 2022, 6)]
 public class Solver : PuzzleSolver
@@ -44,6 +42,6 @@ public class Solver : PuzzleSolver
         }
 
         throw new InvalidOperationException(
-            $"Start-of-packet marker not found in data stream buffer: {_dataStreamBuffer}");
+            $"Packet marker not found in data stream buffer: {_dataStreamBuffer}");
     }
 }

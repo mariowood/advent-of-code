@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using Spectre.Console;
 
 namespace PuzzleSolver.Year2022.Day05;
 
