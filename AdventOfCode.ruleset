@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="AdventOfCode Rules" Description="This rule set contains rules for the AdventOfCode solution." ToolsVersion="17.0">
   <IncludeAll Action="Warning" />
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <Rule Id="CA1062" Action="None" />
-    <Rule Id="CA1303" Action="None" />
-    <Rule Id="CA1814" Action="None" />
-  </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="AD0001" Action="None" />
-    <Rule Id="SA1100" Action="None" />
+    <!-- Prefix local calls with this. https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1101.md -->
     <Rule Id="SA1101" Action="None" />
-    <Rule Id="SA1129" Action="None" />
+    <!-- Elements must appear in the correct order. https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1201.md -->
     <Rule Id="SA1201" Action="None" />
+    <!-- Field names must not begin with underscore. https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1309.md -->
     <Rule Id="SA1309" Action="None" />
-    <Rule Id="SA1601" Action="None" />
-    <Rule Id="SA1609" Action="None" />
+    <!-- File must have a header https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md -->
     <Rule Id="SA1633" Action="None" />
-    <Rule Id="SA1652" Action="None" />
   </Rules>
 </RuleSet>
