@@ -1,23 +1,24 @@
 ﻿namespace PuzzleSolver.Year2022.Day03;
 
-/// <inheritdoc />
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/3.
+/// </summary>
 [PuzzleDescription("Day 3: Rucksack Reorganization", 2022, 3)]
-public class Solver : PuzzleSolver
+public sealed class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public int SolvePartOne() => _puzzleInput.Select(GetDuplicateItemForPack).Sum();
 
-    /// <inheritdoc/>
-    protected override void SolvePartOne()
-    {
-        int itemPriorityTotals = _puzzleInput.Select(GetDuplicateItemForPack).Sum();
-        AddPartOneAnswer("The total item priority.", itemPriorityTotals);
-    }
-
-    /// <inheritdoc/>
-    protected override void SolvePartTwo()
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public int SolvePartTwo()
     {
         if (_puzzleInput.Count % 3 != 0)
         {
@@ -33,7 +34,20 @@ public class Solver : PuzzleSolver
             badgePriorityTotal += GetItemPriority(badge);
         }
 
-        AddPartTwoAnswer("The total badge priority.", badgePriorityTotal);
+        return badgePriorityTotal;
+    }
+
+    /// <inheritdoc/>
+    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+
+    /// <inheritdoc/>
+    protected override void SolvePuzzles()
+    {
+        int partOne = SolvePartOne();
+        int partTwo = SolvePartTwo();
+
+        AddPartOneAnswer("The total item priority.", partOne);
+        AddPartTwoAnswer("The total badge priority.", partTwo);
     }
 
     private static int GetDuplicateItemForPack(string line)

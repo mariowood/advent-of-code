@@ -2,9 +2,11 @@
 
 namespace PuzzleSolver.Year2022.Day05;
 
-/// <inheritdoc />
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/5.
+/// </summary>
 [PuzzleDescription("Day 5: Supply Stacks", 2022, 5)]
-public class Solver : PuzzleSolver
+public sealed class Solver : PuzzleSolver
 {
     private readonly List<List<char>> _cratesPt1 = new();
     private readonly List<List<char>> _cratesPt2 = new();
@@ -12,8 +14,28 @@ public class Solver : PuzzleSolver
     private readonly List<string> _crateLines = new();
     private readonly List<string> _moveLines = new();
 
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public string SolvePartOne()
+    {
+        ProcessMoves();
+        return string.Join(string.Empty, _cratesPt1.Select(c => c[^1]));
+    }
+
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public string SolvePartTwo()
+    {
+        ProcessMovesInStacks();
+        return string.Join(string.Empty, _cratesPt2.Select(c => c[^1]));
+    }
+
     /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines)
+    public override void ProcessInput(List<string> lines)
     {
         foreach (string line in lines)
         {
@@ -32,19 +54,13 @@ public class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    protected override void SolvePartOne()
+    protected override void SolvePuzzles()
     {
-        ProcessMoves();
-        string topCrates = string.Join(string.Empty, _cratesPt1.Select(c => c[^1]));
-        AddPartOneAnswer("The top crates after being moved one at a time.", topCrates);
-    }
+        string partOne = SolvePartOne();
+        string partTwo = SolvePartTwo();
 
-    /// <inheritdoc/>
-    protected override void SolvePartTwo()
-    {
-        ProcessMovesInStacks();
-        string topCrates = string.Join(string.Empty, _cratesPt2.Select(c => c[^1]));
-        AddPartTwoAnswer("The top crates after being moved in stacks.", topCrates);
+        AddPartOneAnswer("The top crates after being moved one at a time.", partOne);
+        AddPartTwoAnswer("The top crates after being moved in stacks.", partTwo);
     }
 
     private void ProcessCrateLines()

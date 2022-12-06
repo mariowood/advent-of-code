@@ -1,16 +1,34 @@
 ﻿namespace PuzzleSolver.Year2022.Day07;
 
-/// <inheritdoc />
-public class Solver : PuzzleSolver
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/7.
+/// </summary>
+public sealed class Solver : PuzzleSolver
 {
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public string SolvePartOne() => "N/A";
+
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public string SolvePartTwo() => "N/A";
+
     /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines)
+    public override void ProcessInput(List<string> lines)
     {
     }
 
     /// <inheritdoc/>
-    protected override void SolvePartOne() => AddPartOneAnswer("Not Implemented.", "N/A");
+    protected override void SolvePuzzles()
+    {
+        string partOne = SolvePartOne();
+        string partTwo = SolvePartTwo();
 
-    /// <inheritdoc/>
-    protected override void SolvePartTwo() => AddPartTwoAnswer("Not Implemented.", "N/A");
+        AddPartOneAnswer("Not Implemented.", partOne);
+        AddPartTwoAnswer("Not Implemented.", partTwo);
+    }
 }

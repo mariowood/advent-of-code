@@ -1,26 +1,36 @@
 ﻿namespace PuzzleSolver.Year2022.Day02;
 
-/// <inheritdoc />
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/2.
+/// </summary>
 [PuzzleDescription("Day 2: Rock Paper Scissors", 2022, 2)]
-public class Solver : PuzzleSolver
+public sealed class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public int SolvePartOne() => _puzzleInput.Sum(line => ProcessGame(line[0], line[2]));
+
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public int SolvePartTwo() => _puzzleInput.Sum(line => ProcessGameForResult(line[0], line[2]));
 
     /// <inheritdoc/>
-    protected override void SolvePartOne()
-    {
-        int totalScore = _puzzleInput.Sum(line => ProcessGame(line[0], line[2]));
-        AddPartOneAnswer("The total score.", totalScore);
-    }
+    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
     /// <inheritdoc/>
-    protected override void SolvePartTwo()
+    protected override void SolvePuzzles()
     {
-        int totalScoreForTargetResult = _puzzleInput.Sum(line => ProcessGameForResult(line[0], line[2]));
-        AddPartTwoAnswer("The total score using target result strategy.", totalScoreForTargetResult);
+        int partOne = SolvePartOne();
+        int partTwo = SolvePartTwo();
+
+        AddPartOneAnswer("The total score.", partOne);
+        AddPartTwoAnswer("The total score using target result strategy.", partTwo);
     }
 
     private static int ProcessGame(char opponent, char player)
