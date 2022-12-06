@@ -6,19 +6,28 @@ using Spectre.Console.Cli;
 
 namespace PuzzleSolver;
 
+/// <inheritdoc />
 internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
 {
+    /// <inheritdoc />
     public sealed class Settings : CommandSettings
     {
+        /// <summary>
+        /// Gets the advent of code year to solve puzzles for.
+        /// </summary>
         [Description("The advent of code year to solve puzzles for.")]
         [CommandArgument(0, "[year]")]
         public int? Year { get; init; }
 
+        /// <summary>
+        /// Gets The advent of code day to solve puzzles for.
+        /// </summary>
         [Description("The advent of code day to solve puzzles for.")]
         [CommandArgument(2, "[day]")]
         public int? Day { get; init; }
     }
 
+    /// <inheritdoc/>
     public override int Execute(
         [NotNull] CommandContext context,
         [NotNull] Settings settings)
@@ -52,5 +61,4 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
     private static List<string> GetPuzzleInput(int year, int day) =>
         File.ReadLines($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!}/Year{year}/Day{day:00}/input.txt")
             .ToList();
-
 }

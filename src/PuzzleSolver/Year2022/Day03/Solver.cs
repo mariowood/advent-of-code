@@ -1,18 +1,22 @@
 ﻿namespace PuzzleSolver.Year2022.Day03;
 
+/// <inheritdoc />
 [PuzzleDescription("Day 3: Rucksack Reorganization", 2022, 3)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
+    /// <inheritdoc/>
     protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
+    /// <inheritdoc/>
     protected override void SolvePartOne()
     {
         int itemPriorityTotals = _puzzleInput.Select(GetDuplicateItemForPack).Sum();
         AddPartOneAnswer("The total item priority.", itemPriorityTotals);
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartTwo()
     {
         if (_puzzleInput.Count % 3 != 0)
@@ -22,7 +26,7 @@ public class Solver : PuzzleSolver
 
         int badgePriorityTotal = 0;
 
-        for (int i = 0; i < _puzzleInput.Count; i+=3)
+        for (int i = 0; i < _puzzleInput.Count; i += 3)
         {
             List<string> group = _puzzleInput.GetRange(i, 3);
             int badge = GetDuplicateBadgeForGroup(group);

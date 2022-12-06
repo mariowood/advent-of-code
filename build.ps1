@@ -96,7 +96,7 @@ if ($SkipTests -eq $false) {
     }
 
     $testProjects = @(
-
+        (Join-Path $solutionPath "tests" "PuzzleSolver.Tests" "PuzzleSolver.Tests.csproj")
     )
 
     ForEach ($testProject in $testProjects) {

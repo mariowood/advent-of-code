@@ -1,18 +1,22 @@
 ﻿namespace PuzzleSolver.Year2022.Day02;
 
+/// <inheritdoc />
 [PuzzleDescription("Day 2: Rock Paper Scissors", 2022, 2)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
+    /// <inheritdoc/>
     protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
+    /// <inheritdoc/>
     protected override void SolvePartOne()
     {
         int totalScore = _puzzleInput.Sum(line => ProcessGame(line[0], line[2]));
         AddPartOneAnswer("The total score.", totalScore);
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartTwo()
     {
         int totalScoreForTargetResult = _puzzleInput.Sum(line => ProcessGameForResult(line[0], line[2]));
@@ -26,7 +30,7 @@ public class Solver : PuzzleSolver
             'A' => Move.Rock,
             'B' => Move.Paper,
             'C' => Move.Scissors,
-            _ => throw new InvalidOperationException($"Opponent choice not valid: {opponent}")
+            _ => throw new InvalidOperationException($"Opponent choice not valid: {opponent}"),
         };
 
         var playerChoice = player switch
@@ -34,7 +38,7 @@ public class Solver : PuzzleSolver
             'X' => Move.Rock,
             'Y' => Move.Paper,
             'Z' => Move.Scissors,
-            _ => throw new InvalidOperationException($"Player choice not valid: {player}")
+            _ => throw new InvalidOperationException($"Player choice not valid: {player}"),
         };
 
         return GetGameResult(opponentChoice, playerChoice);
@@ -47,7 +51,7 @@ public class Solver : PuzzleSolver
             'A' => Move.Rock,
             'B' => Move.Paper,
             'C' => Move.Scissors,
-            _ => throw new InvalidOperationException($"Opponent choice not valid: {opponent}")
+            _ => throw new InvalidOperationException($"Opponent choice not valid: {opponent}"),
         };
 
         Move playerChoice = targetResult switch
@@ -57,23 +61,23 @@ public class Solver : PuzzleSolver
                 Move.Rock => Move.Scissors,
                 Move.Paper => Move.Rock,
                 Move.Scissors => Move.Paper,
-                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}")
+                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}"),
             },
             'Y' => opponentChoice switch
             {
                 Move.Rock => Move.Rock,
                 Move.Paper => Move.Paper,
                 Move.Scissors => Move.Scissors,
-                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}")
+                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}"),
             },
             'Z' => opponentChoice switch
             {
                 Move.Rock => Move.Paper,
                 Move.Paper => Move.Scissors,
                 Move.Scissors => Move.Rock,
-                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}")
+                _ => throw new InvalidOperationException($"Move not allowed: {opponentChoice}"),
             },
-            _ => throw new InvalidOperationException($"Target result not valid: {targetResult}")
+            _ => throw new InvalidOperationException($"Target result not valid: {targetResult}"),
         };
 
         return GetGameResult(opponentChoice, playerChoice);
@@ -141,6 +145,6 @@ public class Solver : PuzzleSolver
     {
         Rock,
         Paper,
-        Scissors
+        Scissors,
     }
 }
