@@ -2,27 +2,36 @@
 
 namespace PuzzleSolver.Year2022.Day04;
 
-/// <inheritdoc />
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/4.
+/// </summary>
 [PuzzleDescription("Day 4: Camp Cleanup", 2022, 4)]
-public class Solver : PuzzleSolver
+public sealed class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public int SolvePartOne() => _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
+
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public int SolvePartTwo() => _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
 
     /// <inheritdoc/>
-    protected override void SolvePartOne()
-    {
-        int overlappingAssignments = _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
-        AddPartOneAnswer("Total overlapping assignments.", overlappingAssignments);
-    }
+    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
     /// <inheritdoc/>
-    protected override void SolvePartTwo()
+    protected override void SolvePuzzles()
     {
-        int partiallyOverlappingAssignments = _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
-        AddPartTwoAnswer("Total partially overlapping assignments.", partiallyOverlappingAssignments);
+        int partOne = SolvePartOne();
+        int partTwo = SolvePartTwo();
+        AddPartOneAnswer("Total overlapping assignments.", partOne);
+        AddPartTwoAnswer("Total partially overlapping assignments.", partTwo);
     }
 
     private static GroupRanges GetGroupRanges(string inputLine)

@@ -25,8 +25,7 @@ public abstract class PuzzleSolver
         _table.AddColumn($"[gold3_1]{Answer}[/]");
 
         ProcessInput(input);
-        SolvePartOne();
-        SolvePartTwo();
+        SolvePuzzles();
 
         AnsiConsole.Write(_table);
     }
@@ -35,17 +34,12 @@ public abstract class PuzzleSolver
     /// Process the given input.
     /// </summary>
     /// <param name="input">The lines read from the puzzle input.txt file.</param>
-    protected abstract void ProcessInput(List<string> input);
+    public abstract void ProcessInput(List<string> input);
 
     /// <summary>
-    /// Solves the first part of an Advent of Code puzzle.
+    /// Solve the puzzles for the day.
     /// </summary>
-    protected abstract void SolvePartOne();
-
-    /// <summary>
-    /// Solves the second part of an Advent of Code puzzle.
-    /// </summary>
-    protected abstract void SolvePartTwo();
+    protected abstract void SolvePuzzles();
 
     /// <summary>
     /// Adds the part one puzzle solution description and answer to the output table.
@@ -61,7 +55,7 @@ public abstract class PuzzleSolver
     /// </summary>
     /// <param name="description">The description of the part two solution.</param>
     /// <param name="answer">The answer for part two.</param>
-    /// <typeparam name="T">The type of the answer.</typeparam>
+    /// /// <typeparam name="T">The type of the answer.</typeparam>
     protected void AddPartTwoAnswer<T>(string description, T answer) =>
         _table.AddRow($"{PartTwo}", description, $"[bold green]{answer}[/]");
 }

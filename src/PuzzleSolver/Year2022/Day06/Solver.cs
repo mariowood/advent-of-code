@@ -1,26 +1,36 @@
 ﻿namespace PuzzleSolver.Year2022.Day06;
 
-/// <inheritdoc />
+/// <summary>
+/// A class which will solve the puzzle from https://adventofcode.com/2022/day/6.
+/// </summary>
 [PuzzleDescription(description: "Day 6: Tuning Trouble", 2022, 6)]
-public class Solver : PuzzleSolver
+public sealed class Solver : PuzzleSolver
 {
     private string _dataStreamBuffer = null!;
 
-    /// <inheritdoc/>
-    protected override void ProcessInput(List<string> lines) => _dataStreamBuffer = lines[0];
+    /// <summary>
+    /// Solves the first part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part one.</returns>
+    public int SolvePartOne() => GetPacketMarker(4);
+
+    /// <summary>
+    /// Solves the second part of the puzzle.
+    /// </summary>
+    /// <returns>The answer for part two.</returns>
+    public int SolvePartTwo() => GetPacketMarker(14);
 
     /// <inheritdoc/>
-    protected override void SolvePartOne()
-    {
-        int startOfPacketMarker = GetPacketMarker(4);
-        AddPartOneAnswer("Start-of-packet marker ends at character.", startOfPacketMarker);
-    }
+    public override void ProcessInput(List<string> lines) => _dataStreamBuffer = lines[0];
 
     /// <inheritdoc/>
-    protected override void SolvePartTwo()
+    protected override void SolvePuzzles()
     {
-        int startOfMessageMarker = GetPacketMarker(14);
-        AddPartTwoAnswer("Start-of-message marker ends at character.", startOfMessageMarker);
+        int partOne = SolvePartOne();
+        int partTwo = SolvePartTwo();
+
+        AddPartOneAnswer("Start-of-packet marker ends at character.", partOne);
+        AddPartTwoAnswer("Start-of-message marker ends at character.", partTwo);
     }
 
     private int GetPacketMarker(int markerSize)
