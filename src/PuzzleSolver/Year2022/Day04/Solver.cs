@@ -2,19 +2,23 @@
 
 namespace PuzzleSolver.Year2022.Day04;
 
+/// <inheritdoc />
 [PuzzleDescription("Day 4: Camp Cleanup", 2022, 4)]
 public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
+    /// <inheritdoc/>
     protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
+    /// <inheritdoc/>
     protected override void SolvePartOne()
     {
         int overlappingAssignments = _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
         AddPartOneAnswer("Total overlapping assignments.", overlappingAssignments);
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartTwo()
     {
         int partiallyOverlappingAssignments = _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
@@ -51,8 +55,11 @@ public class Solver : PuzzleSolver
     private struct GroupRanges
     {
         public int OneStart { get; init; }
+
         public int OneEnd { get; init; }
+
         public int TwoStart { get; init; }
+
         public int TwoEnd { get; init; }
     }
 }

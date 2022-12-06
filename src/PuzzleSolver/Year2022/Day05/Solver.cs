@@ -2,6 +2,7 @@
 
 namespace PuzzleSolver.Year2022.Day05;
 
+/// <inheritdoc />
 [PuzzleDescription("Day 5: Supply Stacks", 2022, 5)]
 public class Solver : PuzzleSolver
 {
@@ -11,6 +12,7 @@ public class Solver : PuzzleSolver
     private readonly List<string> _crateLines = new();
     private readonly List<string> _moveLines = new();
 
+    /// <inheritdoc/>
     protected override void ProcessInput(List<string> lines)
     {
         foreach (string line in lines)
@@ -29,17 +31,19 @@ public class Solver : PuzzleSolver
         ProcessCrateLines();
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartOne()
     {
         ProcessMoves();
-        string topCrates = string.Join("", _cratesPt1.Select(c => c[^1]));
-        AddPartOneAnswer("The top crates after being moved one at a time.",topCrates);
+        string topCrates = string.Join(string.Empty, _cratesPt1.Select(c => c[^1]));
+        AddPartOneAnswer("The top crates after being moved one at a time.", topCrates);
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartTwo()
     {
         ProcessMovesInStacks();
-        string topCrates = string.Join("", _cratesPt2.Select(c => c[^1]));
+        string topCrates = string.Join(string.Empty, _cratesPt2.Select(c => c[^1]));
         AddPartTwoAnswer("The top crates after being moved in stacks.", topCrates);
     }
 

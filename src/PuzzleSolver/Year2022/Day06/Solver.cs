@@ -1,18 +1,22 @@
 ﻿namespace PuzzleSolver.Year2022.Day06;
 
+/// <inheritdoc />
 [PuzzleDescription(description: "Day 6: Tuning Trouble", 2022, 6)]
 public class Solver : PuzzleSolver
 {
     private string _dataStreamBuffer = null!;
 
+    /// <inheritdoc/>
     protected override void ProcessInput(List<string> lines) => _dataStreamBuffer = lines[0];
 
+    /// <inheritdoc/>
     protected override void SolvePartOne()
     {
         int startOfPacketMarker = GetPacketMarker(4);
         AddPartOneAnswer("Start-of-packet marker ends at character.", startOfPacketMarker);
     }
 
+    /// <inheritdoc/>
     protected override void SolvePartTwo()
     {
         int startOfMessageMarker = GetPacketMarker(14);
