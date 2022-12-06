@@ -7,20 +7,18 @@ public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
-    public override void SolvePartOne()
+    protected override void SolvePartOne()
     {
-        int totalScore = _puzzleInput
-            .Sum(line => ProcessGame(line[0], line[2]));
-        AnsiConsole.MarkupLine($"{Constants.PartOne} The total score is [green]{totalScore}[/]");
+        int totalScore = _puzzleInput.Sum(line => ProcessGame(line[0], line[2]));
+        AddPartOneAnswer("The total score.", totalScore);
     }
 
-    public override void SolvePartTwo()
+    protected override void SolvePartTwo()
     {
-        int totalScoreForTargetResult = _puzzleInput
-            .Sum(line => ProcessGameForResult(line[0], line[2]));
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} The total score using target result strategy is [green]{totalScoreForTargetResult}[/]");
+        int totalScoreForTargetResult = _puzzleInput.Sum(line => ProcessGameForResult(line[0], line[2]));
+        AddPartTwoAnswer("The total score using target result strategy.", totalScoreForTargetResult);
     }
 
     private static int ProcessGame(char opponent, char player)

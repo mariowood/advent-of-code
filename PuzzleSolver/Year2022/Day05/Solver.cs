@@ -12,7 +12,7 @@ public class Solver : PuzzleSolver
     private readonly List<string> _crateLines = new();
     private readonly List<string> _moveLines = new();
 
-    public override void ProcessInput(List<string> lines)
+    protected override void ProcessInput(List<string> lines)
     {
         foreach (string line in lines)
         {
@@ -30,18 +30,18 @@ public class Solver : PuzzleSolver
         ProcessCrateLines();
     }
 
-    public override void SolvePartOne()
+    protected override void SolvePartOne()
     {
         ProcessMoves();
         string topCrates = string.Join("", _cratesPt1.Select(c => c[^1]));
-        AnsiConsole.MarkupLine($"{Constants.PartOne} The top crates are [green]{topCrates}[/].");
+        AddPartOneAnswer("The top crates after being moved one at a time.",topCrates);
     }
 
-    public override void SolvePartTwo()
+    protected override void SolvePartTwo()
     {
         ProcessMovesInStacks();
         string topCrates = string.Join("", _cratesPt2.Select(c => c[^1]));
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top crates are [green]{topCrates}[/].");
+        AddPartTwoAnswer("The top crates after being moved in stacks.", topCrates);
     }
 
     private void ProcessCrateLines()
