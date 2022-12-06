@@ -1,6 +1,4 @@
-﻿using Spectre.Console;
-
-namespace PuzzleSolver.Year2022.Day01;
+﻿namespace PuzzleSolver.Year2022.Day01;
 
 [PuzzleDescription("Day 1: Calorie Counting", 2022, 1)]
 public class Solver : PuzzleSolver
