@@ -13,14 +13,14 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
         [Description("The advent of code year to solve puzzles for.")]
         [CommandArgument(0, "[year]")]
         public int? Year { get; init; }
-        
+
         [Description("The advent of code day to solve puzzles for.")]
         [CommandArgument(2, "[day]")]
         public int? Day { get; init; }
     }
 
     public override int Execute(
-        [NotNull] CommandContext context, 
+        [NotNull] CommandContext context,
         [NotNull] Settings settings)
     {
         int year = settings.Year ?? DateTime.UtcNow.Year;
@@ -28,29 +28,29 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
 
         try
         {
-            AnsiConsole.MarkupLine($":christmas_tree::star::santa_claus: Solving puzzle for {day:00} December {year} :santa_claus::star::christmas_tree:");
             PuzzleSolver puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
-            Type puzzleType = puzzleSolver.GetType();
-            string puzzleDescription = puzzleType.GetCustomAttribute<PuzzleDescriptionAttribute>() 
-                is { } puzzleDescriptionAttribute ?
-                puzzleDescriptionAttribute.Description.Trim('"') :
-                "Unknown";
-            AnsiConsole.MarkupLine($"{Constants.Puzzle} [green]{puzzleDescription}[/]");
-            string currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
-            List<string> puzzleInput = File.ReadLines($"{currentDirectory}/Year{year}/Day{day:00}/input.txt").ToList();
-
-            puzzleSolver.ProcessInput(puzzleInput);
-            puzzleSolver.SolvePartOne();
-            puzzleSolver.SolvePartTwo();
+            AnsiConsole.WriteLine();
+            AnsiConsole.MarkupLine($"[bold gold3_1]Puzzle:[/] [green]{GetPuzzleDescription(puzzleSolver)}[/]");
+            AnsiConsole.WriteLine();
+            puzzleSolver.SolveForInput(GetPuzzleInput(year, day));
         }
         catch (Exception ex)
         {
-            AnsiConsole.MarkupLine($"[red]An exception was thrown attempting to solve puzzle for year: {year}, day: {day}.[/]");
-            AnsiConsole.MarkupLine($"[red]Exception: {ex.Message}[/]");
-            AnsiConsole.MarkupLine($"[red]Stack Trace: {ex.StackTrace}[/]");
+            AnsiConsole.WriteException(ex);
             return -1;
         }
 
         return 0;
     }
+
+    private static string GetPuzzleDescription(PuzzleSolver puzzleSolver) =>
+        puzzleSolver.GetType().GetCustomAttribute<PuzzleDescriptionAttribute>()
+            is { } puzzleDescriptionAttribute ?
+            puzzleDescriptionAttribute.Description.Trim('"') :
+            "Unknown";
+
+    private static List<string> GetPuzzleInput(int year, int day) =>
+        File.ReadLines($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!}/Year{year}/Day{day:00}/input.txt")
+            .ToList();
+
 }

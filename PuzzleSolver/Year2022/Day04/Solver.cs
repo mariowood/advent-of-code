@@ -8,20 +8,18 @@ public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
-    public override void SolvePartOne()
+    protected override void SolvePartOne()
     {
-        int overlappingAssignments =
-            _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
-        AnsiConsole.MarkupLine($"{Constants.PartOne} There are [green]{overlappingAssignments}[/] overlapping assignments.");
+        int overlappingAssignments = _puzzleInput.Count(input => RangesFullyOverlap(GetGroupRanges(input)));
+        AddPartOneAnswer("Total overlapping assignments.", overlappingAssignments);
     }
 
-    public override void SolvePartTwo()
+    protected override void SolvePartTwo()
     {
-        int partiallyOverlappingAssignments =
-            _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} There are [green]{partiallyOverlappingAssignments}[/] partially overlapping assignments.");
+        int partiallyOverlappingAssignments = _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
+        AddPartTwoAnswer("Total partially overlapping assignments.", partiallyOverlappingAssignments);
     }
 
     private static GroupRanges GetGroupRanges(string inputLine)
@@ -53,9 +51,9 @@ public class Solver : PuzzleSolver
 
     private struct GroupRanges
     {
-        public int OneStart { get; set; }
-        public int OneEnd { get; set; }
-        public int TwoStart { get; set; }
-        public int TwoEnd { get; set; }
+        public int OneStart { get; init; }
+        public int OneEnd { get; init; }
+        public int TwoStart { get; init; }
+        public int TwoEnd { get; init; }
     }
 }

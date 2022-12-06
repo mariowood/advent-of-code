@@ -15,6 +15,9 @@ indent_size = 2
 [*.ps1]
 end_of_line = lf
 
+[input.txt]
+insert_final_newline = false
+
 # Code files
 [*.{cs,csx,vb,vbx}]
 indent_size = 4

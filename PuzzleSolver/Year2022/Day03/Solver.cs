@@ -7,15 +7,15 @@ public class Solver : PuzzleSolver
 {
     private readonly List<string> _puzzleInput = new();
 
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    protected override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
 
-    public override void SolvePartOne()
+    protected override void SolvePartOne()
     {
         int itemPriorityTotals = _puzzleInput.Select(GetDuplicateItemForPack).Sum();
-        AnsiConsole.MarkupLine($"{Constants.PartOne} The total item priority is [green]{itemPriorityTotals}[/]");
+        AddPartOneAnswer("The total item priority.", itemPriorityTotals);
     }
 
-    public override void SolvePartTwo()
+    protected override void SolvePartTwo()
     {
         if (_puzzleInput.Count % 3 != 0)
         {
@@ -31,7 +31,7 @@ public class Solver : PuzzleSolver
             badgePriorityTotal += GetItemPriority(badge);
         }
 
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} The total badge priority is [green]{badgePriorityTotal}[/]");
+        AddPartTwoAnswer("The total badge priority.", badgePriorityTotal);
     }
 
     private static int GetDuplicateItemForPack(string line)

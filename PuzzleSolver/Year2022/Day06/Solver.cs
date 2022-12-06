@@ -2,15 +2,48 @@
 
 namespace PuzzleSolver.Year2022.Day06;
 
-[PuzzleDescription(description: "Unknown", 2022, 6)]
+[PuzzleDescription(description: "Day 6: Tuning Trouble", 2022, 6)]
 public class Solver : PuzzleSolver
 {
-    public override void ProcessInput(List<string> lines)
-    {
+    private string _dataStreamBuffer = null!;
 
+    protected override void ProcessInput(List<string> lines) => _dataStreamBuffer = lines[0];
+
+    protected override void SolvePartOne()
+    {
+        int startOfPacketMarker = GetPacketMarker(4);
+        AddPartOneAnswer("Start-of-packet marker ends at character.", startOfPacketMarker);
     }
 
-    public override void SolvePartOne() => AnsiConsole.MarkupLine($"{Constants.PartOne} Not implemented");
+    protected override void SolvePartTwo()
+    {
+        int startOfMessageMarker = GetPacketMarker(14);
+        AddPartTwoAnswer("Start-of-message marker ends at character.", startOfMessageMarker);
+    }
 
-    public override void SolvePartTwo() => AnsiConsole.MarkupLine($"{Constants.PartTwo} Not implemented");
+    private int GetPacketMarker(int markerSize)
+    {
+        List<char> startOfPacketMarker = new();
+
+        for (int streamIndex = 0; streamIndex < _dataStreamBuffer.Length; streamIndex++)
+        {
+            if (startOfPacketMarker.Count < markerSize)
+            {
+                startOfPacketMarker.Add(_dataStreamBuffer[streamIndex]);
+
+                if (startOfPacketMarker.Count == markerSize)
+                {
+                    if (startOfPacketMarker.Distinct().Count() == markerSize)
+                    {
+                        return streamIndex + 1;
+                    }
+
+                    startOfPacketMarker.RemoveAt(0);
+                }
+            }
+        }
+
+        throw new InvalidOperationException(
+            $"Start-of-packet marker not found in data stream buffer: {_dataStreamBuffer}");
+    }
 }

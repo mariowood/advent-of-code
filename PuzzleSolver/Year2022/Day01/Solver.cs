@@ -7,15 +7,15 @@ public class Solver : PuzzleSolver
 {
     private readonly List<int> _caloriesPerElf = new();
 
-    public override void ProcessInput(List<string> input)
+    protected override void ProcessInput(List<string> input)
     {
         int currentElfCalories = 0;
 
-        for (int i = 0; i < input.Count; i++)
+        foreach (string line in input)
         {
-            if (!string.IsNullOrWhiteSpace(input[i]))
+            if (!string.IsNullOrWhiteSpace(line))
             {
-                currentElfCalories += int.Parse(input[i]);
+                currentElfCalories += int.Parse(line);
             }
             else
             {
@@ -30,16 +30,16 @@ public class Solver : PuzzleSolver
         }
     }
 
-    public override void SolvePartOne()
+    protected override void SolvePartOne()
     {
         int maxCalories = GetMaxCalories();
-        AnsiConsole.MarkupLine($"{Constants.PartOne} The elf with the most calories has [green]{maxCalories} calories[/]");
+        AddPartOneAnswer("The most calories that an elf hold.", maxCalories);
     }
 
-    public override void SolvePartTwo()
+    protected override void SolvePartTwo()
     {
         int topThreeElvesTotalCalories = GetTopThreeElvesTotalCalories();
-        AnsiConsole.MarkupLine($"{Constants.PartTwo} The top 3 elves have a total of [green]{topThreeElvesTotalCalories} calories.[/]");
+        AddPartTwoAnswer("The total calories held by the top three elves.", topThreeElvesTotalCalories);
     }
 
     private int GetTopThreeElvesTotalCalories() => _caloriesPerElf.OrderDescending().TakeLast(3).Sum();
