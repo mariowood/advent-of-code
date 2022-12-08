@@ -40,7 +40,6 @@ $ ls
 
         // Assert
         partOne.ShouldBe(95437);
-
-        // partTwo.ShouldBe(4);
+        partTwo.ShouldBe(24933642);
     }
 }

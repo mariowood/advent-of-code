@@ -27,7 +27,24 @@ public sealed class Solver : PuzzleSolver
     /// Solves the second part of the puzzle.
     /// </summary>
     /// <returns>The answer for part two.</returns>
-    public int SolvePartTwo() => -1;
+    public int SolvePartTwo()
+    {
+        const int rootSpace = 70000000;
+        const int freeSpaceNeeded = 30000000;
+        Dictionary<string, int> results = new();
+        GetDirectorySize((Directory)_rootFileSystem[0], string.Empty, results);
+
+        int rootVolumeSpaceUsed = results["/"];
+        int freeSpace = rootSpace - rootVolumeSpaceUsed;
+        int needToFree = freeSpaceNeeded - freeSpace;
+
+        var directoryToDelete = results
+            .Where(kv =>
+                kv.Key != "/" &&
+                kv.Value >= needToFree)
+            .MinBy(kv => kv.Value);
+        return directoryToDelete.Value;
+    }
 
     /// <inheritdoc/>
     public override void ProcessInput(List<string> lines)
@@ -112,7 +129,7 @@ public sealed class Solver : PuzzleSolver
         int partTwo = SolvePartTwo();
 
         AddPartOneAnswer("Sum of directories with a total size less than 100000.", partOne);
-        AddPartTwoAnswer("Not Implemented.", partTwo);
+        AddPartTwoAnswer("Size of smallest directory to delete to free enough space.", partTwo);
     }
 
     private Directory FindDirectory(Directory current, string name)
