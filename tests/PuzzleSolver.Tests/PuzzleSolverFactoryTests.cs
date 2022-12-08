@@ -22,7 +22,7 @@ public class PuzzleSolverFactoryTests
     [Theory]
     [InlineData(2022, 0)]
     [InlineData(2021, 1)]
-    [InlineData(2022, 8)]
+    [InlineData(2022, 9)]
     [InlineData(int.MaxValue, int.MaxValue)]
     [InlineData(int.MinValue, int.MinValue)]
     public void Throws_InvalidOperationException_For_Invalid_Year_Day(int year, int day) =>
