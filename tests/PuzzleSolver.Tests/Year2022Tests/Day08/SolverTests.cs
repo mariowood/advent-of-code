@@ -2,7 +2,11 @@
 
 public class SolverTests
 {
-    private const string SampleData = @"";
+    private const string SampleData = @"30373
+25512
+65332
+33549
+35390";
 
     [Fact]
     public void Solves_With_Sample_Data()
@@ -13,11 +17,11 @@ public class SolverTests
 
         // Act
         puzzleSolver.ProcessInput(input);
-        string partOne = puzzleSolver.SolvePartOne();
-        string partTwo = puzzleSolver.SolvePartTwo();
+        int partOne = puzzleSolver.SolvePartOne();
+        int partTwo = puzzleSolver.SolvePartTwo();
 
         // Assert
-        partOne.ShouldBe("N/A");
-        partTwo.ShouldBe("N/A");
+        partOne.ShouldBe(21);
+        partTwo.ShouldBe(8);
     }
 }
