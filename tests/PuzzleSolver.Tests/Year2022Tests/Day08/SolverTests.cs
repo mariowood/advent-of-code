@@ -18,10 +18,10 @@ public class SolverTests
         // Act
         puzzleSolver.ProcessInput(input);
         int partOne = puzzleSolver.SolvePartOne();
-        string partTwo = puzzleSolver.SolvePartTwo();
+        int partTwo = puzzleSolver.SolvePartTwo();
 
         // Assert
         partOne.ShouldBe(21);
-        partTwo.ShouldBe("N/A");
+        partTwo.ShouldBe(8);
     }
 }

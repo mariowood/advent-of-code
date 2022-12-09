@@ -117,7 +117,33 @@ public sealed class Solver : PuzzleSolver
     /// Solves the second part of the puzzle.
     /// </summary>
     /// <returns>The answer for part two.</returns>
-    public string SolvePartTwo() => "N/A";
+    public int SolvePartTwo()
+    {
+        for (int row = 0; row < _trees.Length; row++)
+        {
+            for (int col = 0; col < _trees[row].Length; col++)
+            {
+                int treesVisibleAbove = GetTreesVisibleAbove(row, col);
+                int treesVisibleBelow = GetTreesVisibleBelow(row, col);
+                int treesVisibleRight = GetTreesVisibleRight(row, col);
+                int treesVisibleLeft = GetTreesVisibleLeft(row, col);
+
+                if (row == 0 || col == 0 || row == _trees.Length - 1 || col == _trees[row].Length - 1)
+                {
+                    _trees[row][col].ScenicScore = 0;
+                    continue;
+                }
+
+                int scenicScore = treesVisibleAbove * treesVisibleBelow * treesVisibleRight * treesVisibleLeft;
+
+                _trees[row][col].ScenicScore = scenicScore;
+            }
+        }
+
+        return _trees
+            .SelectMany(t => t)
+            .Max(t => t.ScenicScore);
+    }
 
     /// <inheritdoc/>
     public override void ProcessInput(List<string> lines)
@@ -134,10 +160,82 @@ public sealed class Solver : PuzzleSolver
     protected override void SolvePuzzles()
     {
         int partOne = SolvePartOne();
-        string partTwo = SolvePartTwo();
+        int partTwo = SolvePartTwo();
 
         AddPartOneAnswer("The number of trees visible from any edge.", partOne);
-        AddPartTwoAnswer("Not Implemented.", partTwo);
+        AddPartTwoAnswer("The highest scenic score possible for any tree.", partTwo);
+    }
+
+    private int GetTreesVisibleAbove(int row, int col)
+    {
+        int treeHeight = _trees[row][col].Height;
+        int treesVisible = 0;
+
+        for (int i = row - 1; i >= 0; i--)
+        {
+            treesVisible++;
+
+            if (_trees[i][col].Height >= treeHeight)
+            {
+                break;
+            }
+        }
+
+        return treesVisible;
+    }
+
+    private int GetTreesVisibleBelow(int row, int col)
+    {
+        int treeHeight = _trees[row][col].Height;
+        int treesVisible = 0;
+
+        for (int i = row + 1; i < _trees.Length; i++)
+        {
+            treesVisible++;
+
+            if (_trees[i][col].Height >= treeHeight)
+            {
+                break;
+            }
+        }
+
+        return treesVisible;
+    }
+
+    private int GetTreesVisibleLeft(int row, int col)
+    {
+        int treeHeight = _trees[row][col].Height;
+        int treesVisible = 0;
+
+        for (int i = col - 1; i >= 0; i--)
+        {
+            treesVisible++;
+
+            if (_trees[row][i].Height >= treeHeight)
+            {
+                break;
+            }
+        }
+
+        return treesVisible;
+    }
+
+    private int GetTreesVisibleRight(int row, int col)
+    {
+        int treeHeight = _trees[row][col].Height;
+        int treesVisible = 0;
+
+        for (int i = col + 1; i < _trees[row].Length; i++)
+        {
+            treesVisible++;
+
+            if (_trees[row][i].Height >= treeHeight)
+            {
+                break;
+            }
+        }
+
+        return treesVisible;
     }
 
     private class Tree
@@ -145,5 +243,7 @@ public sealed class Solver : PuzzleSolver
         public bool Visible { get; set; }
 
         public int Height { get; init; }
+
+        public int ScenicScore { get; set; }
     }
 }
