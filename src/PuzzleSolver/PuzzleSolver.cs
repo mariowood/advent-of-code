@@ -28,6 +28,8 @@ public abstract class PuzzleSolver
         SolvePuzzles();
 
         AnsiConsole.Write(_table);
+
+        ShowAdditionalOutput();
     }
 
     /// <summary>
@@ -58,4 +60,11 @@ public abstract class PuzzleSolver
     /// /// <typeparam name="T">The type of the answer.</typeparam>
     protected void AddPartTwoAnswer<T>(string description, T answer) =>
         _table.AddRow($"{PartTwo}", description, $"[bold green]{answer}[/]");
+
+    /// <summary>
+    /// Can be used to show additional output from a puzzle after the table.
+    /// </summary>
+    protected virtual void ShowAdditionalOutput()
+    {
+    }
 }
