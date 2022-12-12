@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace PuzzleSolver.Year2022.Day09;
+﻿namespace PuzzleSolver.Year2022.Day09;
 
 /// <summary>
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/9.
@@ -49,6 +47,68 @@ public sealed class Solver : PuzzleSolver
 
         AddPartOneAnswer("Positions visited by the tail at least once when rope length is two.", partOne);
         AddPartTwoAnswer("Positions visited by the tail at least once when rope length is ten.", partTwo);
+    }
+
+    private static Point GetNewTail(Point head, Point oldTail)
+    {
+        int newX;
+        int newY;
+
+        if (oldTail.X + 2 == head.X && head.Y - 1 <= oldTail.Y && oldTail.Y <= head.Y + 1)
+        {
+            // tail is two to the left of head and tail is within one up or down of head
+            newX = head.X - 1;
+            newY = head.Y;
+        }
+        else if (oldTail.X + 2 == head.X && oldTail.Y + 2 == head.Y)
+        {
+            // tail is two to the left of head and tail is two below head
+            newX = head.X - 1;
+            newY = head.Y - 1;
+        }
+        else if (oldTail.X + 2 == head.X && oldTail.Y - 2 == head.Y)
+        {
+            // tail is two to the left of head and tail is two above head
+            newX = head.X - 1;
+            newY = head.Y + 1;
+        }
+        else if (oldTail.X - 2 == head.X && head.Y - 1 <= oldTail.Y && oldTail.Y <= head.Y + 1)
+        {
+            // tail is two to the right of head and tail is within one up or down of head
+            newX = head.X + 1;
+            newY = head.Y;
+        }
+        else if (oldTail.X - 2 == head.X && oldTail.Y + 2 == head.Y)
+        {
+            // tail is two to the right of head and tail is two below head
+            newX = head.X + 1;
+            newY = head.Y - 1;
+        }
+        else if (oldTail.X - 1 > head.X && oldTail.Y - 2 == head.Y)
+        {
+            // tail is two to the right of head and tail is two below head
+            newX = head.X + 1;
+            newY = head.Y + 1;
+        }
+        else if (oldTail.Y + 2 == head.Y && head.X - 1 <= oldTail.X && oldTail.X <= head.X + 1)
+        {
+            // tail is two below the head and tail is within one left of right of head
+            newX = head.X;
+            newY = head.Y - 1;
+        }
+        else if (oldTail.Y - 2 == head.Y && head.X - 1 <= oldTail.X && oldTail.X <= head.X + 1)
+        {
+            // tail is two above the head and tail is within one left of right of head
+            newX = head.X;
+            newY = head.Y + 1;
+        }
+        else
+        {
+            newX = oldTail.X;
+            newY = oldTail.Y;
+        }
+
+        return new Point { X = newX, Y = newY };
     }
 
     private void ProcessMoves(int ropeLength, List<List<Point>> pointsVisited)
@@ -152,68 +212,6 @@ public sealed class Solver : PuzzleSolver
                 pointsVisited.Add(newMoves);
             }
         }
-    }
-
-    private Point GetNewTail(Point head, Point oldTail)
-    {
-        int newX = 0;
-        int newY = 0;
-
-        if (oldTail.X + 2 == head.X && head.Y - 1 <= oldTail.Y && oldTail.Y <= head.Y + 1)
-        {
-            // tail is two to the left of head and tail is within one up or down of head
-            newX = head.X - 1;
-            newY = head.Y;
-        }
-        else if (oldTail.X + 2 == head.X && oldTail.Y + 2 == head.Y)
-        {
-            // tail is two to the left of head and tail is two below head
-            newX = head.X - 1;
-            newY = head.Y - 1;
-        }
-        else if (oldTail.X + 2 == head.X && oldTail.Y - 2 == head.Y)
-        {
-            // tail is two to the left of head and tail is two above head
-            newX = head.X - 1;
-            newY = head.Y + 1;
-        }
-        else if (oldTail.X - 2 == head.X && head.Y - 1 <= oldTail.Y && oldTail.Y <= head.Y + 1)
-        {
-            // tail is two to the right of head and tail is within one up or down of head
-            newX = head.X + 1;
-            newY = head.Y;
-        }
-        else if (oldTail.X - 2 == head.X && oldTail.Y + 2 == head.Y)
-        {
-            // tail is two to the right of head and tail is two below head
-            newX = head.X + 1;
-            newY = head.Y - 1;
-        }
-        else if (oldTail.X - 1 > head.X && oldTail.Y - 2 == head.Y)
-        {
-            // tail is two to the right of head and tail is two below head
-            newX = head.X + 1;
-            newY = head.Y + 1;
-        }
-        else if (oldTail.Y + 2 == head.Y && head.X - 1 <= oldTail.X && oldTail.X <= head.X + 1)
-        {
-            // tail is two below the head and tail is within one left of right of head
-            newX = head.X;
-            newY = head.Y - 1;
-        }
-        else if (oldTail.Y - 2 == head.Y && head.X - 1 <= oldTail.X && oldTail.X <= head.X + 1)
-        {
-            // tail is two above the head and tail is within one left of right of head
-            newX = head.X;
-            newY = head.Y + 1;
-        }
-        else
-        {
-            newX = oldTail.X;
-            newY = oldTail.Y;
-        }
-
-        return new Point { X = newX, Y = newY };
     }
 
     private struct Point
