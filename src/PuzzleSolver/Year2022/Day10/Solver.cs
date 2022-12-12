@@ -60,13 +60,13 @@ public class Solver : PuzzleSolver
             switch (parts[0])
             {
                 case "noop":
-                    _screen[(cycles - 1) / 40, (cycles - 1) % 40] = GetPixel(cycles, register);
+                    AddPixel(cycles, register);
                     cycles++;
                     break;
                 case "addx":
-                    _screen[(cycles - 1) / 40, (cycles - 1) % 40] = GetPixel(cycles, register);
+                    AddPixel(cycles, register);
                     cycles++;
-                    _screen[(cycles - 1) / 40, (cycles - 1) % 40] = GetPixel(cycles, register);
+                    AddPixel(cycles, register);
                     cycles++;
                     register += int.Parse(parts[1]);
                     break;
@@ -118,17 +118,19 @@ public class Solver : PuzzleSolver
         return 0;
     }
 
-    private static string GetPixel(int cycle, int register)
+    private void AddPixel(int cycle, int register)
     {
-        int drawPixel = (cycle - 1) % 40;
+        int row = (cycle - 1) / 40;
+        int col = (cycle - 1) % 40;
         int spriteMin = register - 1;
         int spriteMax = register + 1;
 
-        if (spriteMin == drawPixel || register == drawPixel || spriteMax == drawPixel)
+        if (spriteMin == col || register == col || spriteMax == col)
         {
-            return "#";
+            _screen[row, col] = "#";
+            return;
         }
 
-        return " ";
+        _screen[row, col] = " ";
     }
 }
