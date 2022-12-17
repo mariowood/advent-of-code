@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/3.
 /// </summary>
 [PuzzleDescription("Day 3: Rucksack Reorganization", 2022, 3)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
 
@@ -38,7 +38,7 @@ public sealed class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    public override void ProcessInput(List<string> input) => _puzzleInput.AddRange(input);
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()
@@ -60,8 +60,8 @@ public sealed class Solver : PuzzleSolver
 
     private static int GetDuplicateBadgeForGroup(List<string> group) =>
         group[0].First(i =>
-            group[1].Contains(i) &&
-            group[2].Contains(i));
+            group[1].Contains(i, StringComparison.Ordinal) &&
+            group[2].Contains(i, StringComparison.Ordinal));
 
     private static int GetItemPriority(int item)
     {

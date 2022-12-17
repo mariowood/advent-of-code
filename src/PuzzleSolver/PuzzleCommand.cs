@@ -37,7 +37,7 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
 
         try
         {
-            PuzzleSolver puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
+            SolverBase puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
             AnsiConsole.WriteLine();
             AnsiConsole.MarkupLine($"[bold gold3_1]Puzzle:[/] [green]{GetPuzzleDescription(puzzleSolver)}[/]");
             AnsiConsole.WriteLine();
@@ -52,7 +52,7 @@ internal sealed class PuzzleCommand : Command<PuzzleCommand.Settings>
         return 0;
     }
 
-    private static string GetPuzzleDescription(PuzzleSolver puzzleSolver) =>
+    private static string GetPuzzleDescription(SolverBase puzzleSolver) =>
         puzzleSolver.GetType().GetCustomAttribute<PuzzleDescriptionAttribute>()
             is { } puzzleDescriptionAttribute ?
             puzzleDescriptionAttribute.Description.Trim('"') :

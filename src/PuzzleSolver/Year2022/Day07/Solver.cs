@@ -6,7 +6,7 @@ namespace PuzzleSolver.Year2022.Day07;
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/7.
 /// </summary>
 [PuzzleDescription(description: "Day 7: No Space Left On Device", 2022, 7)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<FileSystemObject> _rootFileSystem = new();
 
@@ -47,7 +47,7 @@ public sealed class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines)
+    public override void ProcessInput(List<string> input)
     {
         const string commandPattern = @"^\$\s(\w+)\s?(\S+)?$";
         const string dirPattern = @"^dir\s(\w+)$";
@@ -58,7 +58,7 @@ public sealed class Solver : PuzzleSolver
 
         Directory root = new Directory("/", new List<FileSystemObject>());
         Directory workingDirectory = root;
-        foreach (string line in lines)
+        foreach (string line in input)
         {
             if (commandRegex.IsMatch(line))
             {
@@ -132,7 +132,7 @@ public sealed class Solver : PuzzleSolver
         AddPartTwoAnswer("Size of smallest directory to delete to free enough space.", partTwo);
     }
 
-    private Directory FindDirectory(Directory current, string name)
+    private static Directory FindDirectory(Directory current, string name)
     {
         if (current.Children.Any(child =>
                 child.ObjectType == ObjectType.Directory &&
@@ -183,7 +183,7 @@ public sealed class Solver : PuzzleSolver
         }
     }
 
-    private class File : FileSystemObject
+    private sealed class File : FileSystemObject
     {
         public int Size { get; }
 
@@ -194,7 +194,7 @@ public sealed class Solver : PuzzleSolver
         }
     }
 
-    private class Directory : FileSystemObject
+    private sealed class Directory : FileSystemObject
     {
         public Directory Parent { get; }
 

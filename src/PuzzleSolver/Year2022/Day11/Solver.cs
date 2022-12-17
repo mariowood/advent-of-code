@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/11.
 /// </summary>
 [PuzzleDescription(description: "Day 11: Monkey in the Middle", 2022, 11)]
-public class Solver : PuzzleSolver
+public class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
     private readonly List<Monkey> _monkeys = new();
@@ -63,12 +63,12 @@ public class Solver : PuzzleSolver
         for (int i = 0; i < _puzzleInput.Count; i += 7)
         {
             List<long> startingItems = _puzzleInput[i + 1]
-                .Replace("  Starting items: ", string.Empty)
+                .Replace("  Starting items: ", string.Empty, StringComparison.Ordinal)
                 .Split(',')
                 .Select(item => long.Parse(item.Trim()))
                 .ToList();
             string[] operationParts = _puzzleInput[i + 2]
-                .Replace("  Operation: new = ", string.Empty)
+                .Replace("  Operation: new = ", string.Empty, StringComparison.Ordinal)
                 .Split(' ');
 
             long Operation(long x) =>
@@ -82,9 +82,9 @@ public class Solver : PuzzleSolver
                 };
 
             int divisibleBy = int.Parse(
-                _puzzleInput[i + 3].Replace("  Test: divisible by ", string.Empty));
-            int trueMonkey = int.Parse(_puzzleInput[i + 4].Replace("    If true: throw to monkey ", string.Empty));
-            int falseMonkey = int.Parse(_puzzleInput[i + 5].Replace("    If false: throw to monkey ", string.Empty));
+                _puzzleInput[i + 3].Replace("  Test: divisible by ", string.Empty, StringComparison.Ordinal));
+            int trueMonkey = int.Parse(_puzzleInput[i + 4].Replace("    If true: throw to monkey ", string.Empty, StringComparison.Ordinal));
+            int falseMonkey = int.Parse(_puzzleInput[i + 5].Replace("    If false: throw to monkey ", string.Empty, StringComparison.Ordinal));
             int Test(long x)
             {
                 return x % divisibleBy == 0 ? trueMonkey : falseMonkey;
@@ -138,7 +138,7 @@ public class Solver : PuzzleSolver
         }
     }
 
-    private class Monkey
+    private sealed class Monkey
     {
         public Monkey(
             List<long> startingItems,
