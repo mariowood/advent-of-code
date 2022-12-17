@@ -13,7 +13,7 @@ public class PuzzleSolverFactoryTests
     public void Can_Get_Puzzle_Solver(int year, int day, Type expectedType)
     {
         // Arrange && Act
-        PuzzleSolver puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
+        SolverBase puzzleSolver = PuzzleSolverFactory.GetPuzzleSolver(year, day);
 
         // Assert
         puzzleSolver.ShouldBeOfType(expectedType);

@@ -4,7 +4,7 @@
 /// An attribute describing an advent of code puzzle being solved.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
-public class PuzzleDescriptionAttribute : Attribute
+public sealed class PuzzleDescriptionAttribute : Attribute
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PuzzleDescriptionAttribute"/> class.

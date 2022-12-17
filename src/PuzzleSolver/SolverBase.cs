@@ -5,7 +5,7 @@ namespace PuzzleSolver;
 /// <summary>
 /// An abstract representation of a class which solves puzzles.
 /// </summary>
-public abstract class PuzzleSolver
+public abstract class SolverBase
 {
     private const string PartOne = "[bold blue]One[/]";
     private const string PartTwo = "[bold purple]Two[/]";

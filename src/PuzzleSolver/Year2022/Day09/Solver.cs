@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/9.
 /// </summary>
 [PuzzleDescription(description: "Day 9: Rope Bridge", 2022, 9)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
 
@@ -37,7 +37,7 @@ public sealed class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    public override void ProcessInput(List<string> input) => _puzzleInput.AddRange(input);
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()

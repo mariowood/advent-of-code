@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/6.
 /// </summary>
 [PuzzleDescription(description: "Day 6: Tuning Trouble", 2022, 6)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private string _dataStreamBuffer = null!;
 
@@ -21,7 +21,7 @@ public sealed class Solver : PuzzleSolver
     public int SolvePartTwo() => GetPacketMarker(14);
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _dataStreamBuffer = lines[0];
+    public override void ProcessInput(List<string> input) => _dataStreamBuffer = input[0];
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()

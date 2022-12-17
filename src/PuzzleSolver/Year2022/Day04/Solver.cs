@@ -6,7 +6,7 @@ namespace PuzzleSolver.Year2022.Day04;
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/4.
 /// </summary>
 [PuzzleDescription("Day 4: Camp Cleanup", 2022, 4)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
 
@@ -23,7 +23,7 @@ public sealed class Solver : PuzzleSolver
     public int SolvePartTwo() => _puzzleInput.Count(input => RangesPartiallyOverlap(GetGroupRanges(input)));
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    public override void ProcessInput(List<string> input) => _puzzleInput.AddRange(input);
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()

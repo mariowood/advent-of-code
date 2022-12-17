@@ -6,10 +6,12 @@ namespace PuzzleSolver.Year2022.Day10;
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/10.
 /// </summary>
 [PuzzleDescription(description: "Day 10: Cathode-Ray Tube", 2022, 10)]
-public class Solver : PuzzleSolver
+public class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
+#pragma warning disable CA1814
     private readonly string[,] _screen = new string[6, 40];
+#pragma warning restore CA1814
 
     /// <summary>
     /// Solves the first part of the puzzle.
@@ -79,7 +81,7 @@ public class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    public override void ProcessInput(List<string> input) => _puzzleInput.AddRange(input);
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()

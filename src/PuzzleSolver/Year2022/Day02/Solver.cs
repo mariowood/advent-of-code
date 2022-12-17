@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/2.
 /// </summary>
 [PuzzleDescription("Day 2: Rock Paper Scissors", 2022, 2)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<string> _puzzleInput = new();
 
@@ -21,7 +21,7 @@ public sealed class Solver : PuzzleSolver
     public int SolvePartTwo() => _puzzleInput.Sum(line => ProcessGameForResult(line[0], line[2]));
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines) => _puzzleInput.AddRange(lines);
+    public override void ProcessInput(List<string> input) => _puzzleInput.AddRange(input);
 
     /// <inheritdoc/>
     protected override void SolvePuzzles()

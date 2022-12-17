@@ -6,7 +6,7 @@ namespace PuzzleSolver.Year2022.Day05;
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/5.
 /// </summary>
 [PuzzleDescription("Day 5: Supply Stacks", 2022, 5)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<List<char>> _cratesPt1 = new();
     private readonly List<List<char>> _cratesPt2 = new();
@@ -35,11 +35,11 @@ public sealed class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines)
+    public override void ProcessInput(List<string> input)
     {
-        foreach (string line in lines)
+        foreach (string line in input)
         {
-            if (line.StartsWith("move"))
+            if (line.StartsWith("move", StringComparison.Ordinal))
             {
                 _moveLines.Add(line);
             }

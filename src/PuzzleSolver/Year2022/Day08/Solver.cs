@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/8.
 /// </summary>
 [PuzzleDescription(description: "Day 8: Treetop Tree House", 2022, 8)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private Tree[][] _trees = null!;
 
@@ -146,13 +146,13 @@ public sealed class Solver : PuzzleSolver
     }
 
     /// <inheritdoc/>
-    public override void ProcessInput(List<string> lines)
+    public override void ProcessInput(List<string> input)
     {
-        _trees = new Tree[lines.Count][];
+        _trees = new Tree[input.Count][];
 
-        for (int line = 0; line < lines.Count; line++)
+        for (int line = 0; line < input.Count; line++)
         {
-            _trees[line] = lines[line].Select(c => new Tree { Height = c - 48 }).ToArray();
+            _trees[line] = input[line].Select(c => new Tree { Height = c - 48 }).ToArray();
         }
     }
 
@@ -238,7 +238,7 @@ public sealed class Solver : PuzzleSolver
         return treesVisible;
     }
 
-    private class Tree
+    private sealed class Tree
     {
         public bool Visible { get; set; }
 

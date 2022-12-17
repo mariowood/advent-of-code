@@ -4,7 +4,7 @@
 /// A class which will solve the puzzle from https://adventofcode.com/2022/day/1.
 /// </summary>
 [PuzzleDescription("Day 1: Calorie Counting", 2022, 1)]
-public sealed class Solver : PuzzleSolver
+public sealed class Solver : SolverBase
 {
     private readonly List<int> _caloriesPerElf = new();
 
